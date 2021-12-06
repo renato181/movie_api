@@ -1,1 +1,60 @@
-logs
+logsURL: /
+Timestamp: Mon Dec 06 2021 10:46:11 GMT-0500 (Eastern Standard Time)
+
+URL: /favicon.ico
+Timestamp: Mon Dec 06 2021 10:46:11 GMT-0500 (Eastern Standard Time)
+
+URL: /documentation
+Timestamp: Mon Dec 06 2021 10:46:27 GMT-0500 (Eastern Standard Time)
+
+URL: /favicon.ico
+Timestamp: Mon Dec 06 2021 10:46:27 GMT-0500 (Eastern Standard Time)
+
+URL: /documentation
+Timestamp: Mon Dec 06 2021 14:03:57 GMT-0500 (Eastern Standard Time)
+
+URL: /favicon.ico
+Timestamp: Mon Dec 06 2021 14:03:57 GMT-0500 (Eastern Standard Time)
+
+URL: /documentation
+Timestamp: Mon Dec 06 2021 14:03:58 GMT-0500 (Eastern Standard Time)
+
+URL: /favicon.ico
+Timestamp: Mon Dec 06 2021 14:03:58 GMT-0500 (Eastern Standard Time)
+
+URL: /documentation
+Timestamp: Mon Dec 06 2021 14:04:44 GMT-0500 (Eastern Standard Time)
+
+URL: /favicon.ico
+Timestamp: Mon Dec 06 2021 14:04:44 GMT-0500 (Eastern Standard Time)
+
+URL: /
+Timestamp: Mon Dec 06 2021 14:04:48 GMT-0500 (Eastern Standard Time)
+
+URL: /favicon.ico
+Timestamp: Mon Dec 06 2021 14:04:48 GMT-0500 (Eastern Standard Time)
+
+URL: /index
+Timestamp: Mon Dec 06 2021 14:05:09 GMT-0500 (Eastern Standard Time)
+
+URL: /favicon.ico
+Timestamp: Mon Dec 06 2021 14:05:09 GMT-0500 (Eastern Standard Time)
+
+URL: /documentation
+Timestamp: Mon Dec 06 2021 14:05:27 GMT-0500 (Eastern Standard Time)
+
+URL: /favicon.ico
+Timestamp: Mon Dec 06 2021 14:05:27 GMT-0500 (Eastern Standard Time)
+
+URL: /documentation
+Timestamp: Mon Dec 06 2021 14:18:55 GMT-0500 (Eastern Standard Time)
+
+URL: /favicon.ico
+Timestamp: Mon Dec 06 2021 14:18:55 GMT-0500 (Eastern Standard Time)
+
+URL: /
+Timestamp: Mon Dec 06 2021 14:19:48 GMT-0500 (Eastern Standard Time)
+
+URL: /favicon.ico
+Timestamp: Mon Dec 06 2021 14:19:48 GMT-0500 (Eastern Standard Time)
+
