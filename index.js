@@ -1,48 +1,102 @@
 const express = require('express'),
-  morgan = require('morgan');
+  morgan = require('morgan'),
+  bodyParser = require('body-parser'),
+  uuid = require ('uuid');
 
 const app = express();
 
-let topMovies = [
+app.use(bodyParser.json());
+
+let movies = [
   {
     title: 'Aliens',
-    director: 'James Cameron'
+    director: {
+      name: 'James Cameron',
+      birth: '1954',
+      died: 'still alive',
+    },
+    genre: 'Sci-Fi'
   },
   {
     title: 'River\'s Edge',
-    director: 'Tim Hunter'
+    director: {
+      name: 'Tim Hunter',
+      born: 1947,
+      died: 'still alive'
+    },
+    genre: 'Crime'
   },
   {
     title: 'Platoon',
-    director: 'Oliver Stone'
+    director: {
+      name: 'Oliver Stone',
+      born: 1946,
+      died: 'still alive'
+    },
+    genre: 'War'
   },
   {
     title: 'Blue Velvet',
-    director: 'David Lynch'
-  },
+    director: {
+      name: 'David Lynch',
+      born: 1946,
+      died: 'still alive'
+    },
+    genre: 'Mystery'
+  }, 
   {
     title: 'Stand By Me',
-    director: 'Rob Reiner'
+    director: {
+      name: 'Rob Reiner',
+      born: 1947,
+      died: 'still alive'
+    },
+    genre: 'Adventure'
   },
   {
     title: 'Labyrinth',
-    director: 'Jim Henson'
+    director: {
+      name: 'Jim Henson',
+      born: 1936,
+      died: 1990
+    },
+    genre: 'Fantasy'
   },
   {
     title: 'Manhunter',
-    director: 'Michael Mann'
+    director: {
+      name: 'Michael Mann',
+      born: 1943,
+      died: 'still alive'
+    },
+    genre: 'Crime'
   },
   {
     title: 'The Hitcher',
-    director: 'Robert Harmon'
+    director: {
+      name: 'Robert Harmon',
+      born: 1953,
+      died: 'still alive'
+    },
+    genre: 'Thriller'
   },
   {
     title: 'Salvador',
-    director: 'Oliver Stone'
+    director: {
+      name: 'Oliver Stone',
+      born: 1946,
+      died: 'still alive'
+    },
+    genre: 'History'
   },
   {
     title: 'The Color of Money',
-    director: 'Martin Scorsese'
+    director: {
+      name: 'Martin Scorcese',
+      born: 1942,
+      died: 'still alive'
+    },
+    genre: 'Sport'
   },
   
 ];
@@ -54,12 +108,58 @@ app.get('/', (req, res) => {
   res.send('Welcome to my 80\'s movies!');
 });
 
+app.get('/movies', (req, res) => {
+  res.status(200).json(movies);
+});
+
+app.get('/movies/:title', (req, res) => {
+  res.status(200).json(movies.find((movie) => {
+      return movie.title === req.params.title
+  }));
+});
+
+
+app.get('/genres/:genre', (req, res) => {
+  res.status(200).json(movies.find((genres) => {
+    return genres.genre === req.params.genre
+  }));
+});
+
+app.get('/directors/:directorName', (req, res) => {
+  res.status(200).json(movies.find((director) => {
+      return director.director.name === req.params.directorName
+  })) 
+})
+
+
 app.get('/documentation', (req, res) => {                  
   res.sendFile('public/documentation.html', { root: __dirname });
 });
 
-app.get('/movies', (req, res) => {
-  res.json(topMovies);
+
+app.get('/users', (req, res) => {
+  res.send('current users')
+});
+
+// Add new user
+app.post('/users/:username', (req, res) => {
+  res.send('user added')
+});
+
+app.delete('/users/:delete', (req, res) => {
+  res.send('user deleted')
+});
+
+app.post('/users/:username/:add', (req, res) => {
+  res.send('user added a favorite movie')
+});
+
+app.delete('/users/:username/:remove', (req, res) => {
+  res.send('user deleted a favorite movie')
+});
+
+app.delete('/users/:deregister', (req, res) => {
+  res.send('user unregistered')
 });
 
 

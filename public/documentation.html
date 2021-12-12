@@ -12,6 +12,270 @@
     movies, directors, and genres. Users will be able to sign up, update their
     personal information, and create a list of their all time favorite movies.
     </H2>
+
+<table>
+    <tr>
+        <th>
+            Description
+        </th>
+        <th>
+            endpoint URL
+        </th>
+        <th>
+            method
+        </th>
+        <th>
+            query parameters
+        </th>
+        <th>
+            format of data
+        </th>
+        <th>
+            format of response
+        </th>
+    </tr>
+    <tr>
+        <td>
+            welcome message
+        </td>
+        <td>
+            '/'
+        </td>
+        <td>
+            get
+        </td>
+        <td>
+            none
+        </td>
+        <td>
+            "Welcome to my 80's movies!"
+        </td>
+        <td>
+            text
+        </td>
+    </tr>
+    <tr>
+        <td>
+            movies json file
+        </td>
+        <td>
+            '/movies'
+        </td>
+        <td>
+            get
+        </td>
+        <td>
+            none
+        </td>
+        <td>
+            the entire list of movies
+        </td>
+        <td>
+            text
+        </td>
+    </tr>
+    <tr>
+        <td>
+            will list movies with a specific title
+        </td>
+        <td>
+            '/movies/:title'
+        </td>
+        <td>
+            get
+        </td>
+        <td>
+            :title
+        </td>
+        <td>
+            will show all the information of any movie with this title
+        </td>
+        <td>
+            text
+        </td>
+    </tr>
+    <tr>
+        <td>
+            will show movies with a specific genre
+        </td>
+        <td>
+            '/genres/:genre'
+        </td>
+        <td>
+            get
+        </td>
+        <td>
+            :genre
+        </td>
+        <td>
+            will show all the information of any movie with this genre
+        </td>
+        <td>
+            text
+        </td>
+    </tr>
+    <tr>
+        <td>
+            will show movies based on the name of the director
+        </td>
+        <td>
+            '/directors/:directorName'
+        </td>
+        <td>
+            get
+        </td>
+        <td>
+            :directorName
+        </td>
+        <td>
+            will show all the information of the movies directed by this person
+        </td>
+        <td>
+            text
+        </td>
+    </tr>
+    <tr>
+        <td>
+            will show the documentation html file containing this table
+        </td>
+        <td>
+            '/documentation'
+        </td>
+        <td>
+            get
+        </td>
+        <td>
+            none
+        </td>
+        <td>
+            will show a project description and this table (so far)
+        </td>
+        <td>
+            text
+        </td>
+    </tr>
+    <tr>
+        <td>
+            will show a list of users
+        </td>
+        <td>
+            '/users'
+        </td>
+        <td>
+            get
+        </td>
+        <td>
+            none
+        </td>
+        <td>
+            displays current users
+        </td>
+        <td>
+            text
+        </td>
+    </tr>
+    <tr>
+        <td>
+            will show a new user added
+        </td>
+        <td>
+            '/users/:username'
+        </td>
+        <td>
+            post
+        </td>
+        <td>
+            :username
+        </td>
+        <td>
+            states a new user has been added
+        </td>
+        <td>
+            text
+        </td>
+    </tr>
+    <tr>
+        <td>
+            will show a user deleted
+        </td>
+        <td>
+            '/users/:delete'
+        </td>
+        <td>
+            delete
+        </td>
+        <td>
+            :delete
+        </td>
+        <td>
+            states a user has been deleted
+        </td>
+        <td>
+            text
+        </td>
+    </tr>
+    <tr>
+        <td>
+            will show a user added a movie to their favorites list
+        </td>
+        <td>
+            '/users/:username/:add'
+        </td>
+        <td>
+            post
+        </td>
+        <td>
+            :username/:add
+        </td>
+        <td>
+            states a user added a movie to their favorites list
+        </td>
+        <td>
+            text
+        </td>
+    </tr>
+    <tr>
+        <td>
+            will show a user deleted a movie from their favorites list
+        </td>
+        <td>
+            '/users/:username/:remove'
+        </td>
+        <td>
+            delete
+        </td>
+        <td>
+            :username/:remove
+        </td>
+        <td>
+            states a user deleted a movie from their favorites list
+        </td>
+        <td>
+            text
+        </td>
+    </tr>
+    <tr>
+        <td>
+            will show a user unregistered from the site
+        </td>
+        <td>
+            '/users/:deregister'
+        </td>
+        <td>
+            delete
+        </td>
+        <td>
+            :deregister
+        </td>
+        <td>
+            states that a user has unregistered rom the site
+        </td>
+        <td>
+            text
+        </td>
+    </tr>
+</table>
+
 </body>
   
 </html>
