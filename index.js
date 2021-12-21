@@ -1,105 +1,31 @@
 const express = require('express'),
-  morgan = require('morgan'),
   bodyParser = require('body-parser'),
   uuid = require ('uuid');
 
+const morgan = require('morgan');
 const app = express();
+const mongoose = require('mongoose');
+const Models = require('./models.js');
+
+const Movies = Models.Movie;
+const Users = Models.User;
+const Genres = Models.Genre;
+const Directors = Models.Director;
+
+mongoose.connect('mongodb://localhost:27017/myFlixDB', 
+{ useNewUrlParser: true, 
+  useUnifiedTopology: true });
 
 app.use(bodyParser.json());
 
-let movies = [
-  {
-    title: 'Aliens',
-    director: {
-      name: 'James Cameron',
-      birth: '1954',
-      died: 'still alive',
-    },
-    genre: 'Sci-Fi'
-  },
-  {
-    title: 'River\'s Edge',
-    director: {
-      name: 'Tim Hunter',
-      born: 1947,
-      died: 'still alive'
-    },
-    genre: 'Crime'
-  },
-  {
-    title: 'Platoon',
-    director: {
-      name: 'Oliver Stone',
-      born: 1946,
-      died: 'still alive'
-    },
-    genre: 'War'
-  },
-  {
-    title: 'Blue Velvet',
-    director: {
-      name: 'David Lynch',
-      born: 1946,
-      died: 'still alive'
-    },
-    genre: 'Mystery'
-  }, 
-  {
-    title: 'Stand By Me',
-    director: {
-      name: 'Rob Reiner',
-      born: 1947,
-      died: 'still alive'
-    },
-    genre: 'Adventure'
-  },
-  {
-    title: 'Labyrinth',
-    director: {
-      name: 'Jim Henson',
-      born: 1936,
-      died: 1990
-    },
-    genre: 'Fantasy'
-  },
-  {
-    title: 'Manhunter',
-    director: {
-      name: 'Michael Mann',
-      born: 1943,
-      died: 'still alive'
-    },
-    genre: 'Crime'
-  },
-  {
-    title: 'The Hitcher',
-    director: {
-      name: 'Robert Harmon',
-      born: 1953,
-      died: 'still alive'
-    },
-    genre: 'Thriller'
-  },
-  {
-    title: 'Salvador',
-    director: {
-      name: 'Oliver Stone',
-      born: 1946,
-      died: 'still alive'
-    },
-    genre: 'History'
-  },
-  {
-    title: 'The Color of Money',
-    director: {
-      name: 'Martin Scorcese',
-      born: 1942,
-      died: 'still alive'
-    },
-    genre: 'Sport'
-  },
-  
-];
+app.use(morgan('common'))
+
+app.get('/', (req, res) => {
+  res.send('Welcome to my 80\'s movies!');
+});
+
+
+
 
 app.use(express.static('public'));
 
@@ -109,27 +35,52 @@ app.get('/', (req, res) => {
 });
 
 app.get('/movies', (req, res) => {
-  res.status(200).json(movies);
+  Movies.find()
+    .then((movies) => {
+      res.status(201).json(movies);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send('Error: ' + err);
+    });
 });
+
 
 app.get('/movies/:title', (req, res) => {
-  res.status(200).json(movies.find((movie) => {
-      return movie.title === req.params.title
-  }));
+  Movies.findOne({ Title: req.params.Title})
+  .then((movies) => {
+      res.status(201).json(movies);
+  })
+  .catch((err) => {
+    console.error(err);
+    res.status(500).send('Error: ' + err);
+  });
 });
 
 
-app.get('/genres/:genre', (req, res) => {
-  res.status(200).json(movies.find((genres) => {
-    return genres.genre === req.params.genre
-  }));
+app.get('/genre/:Name', (req, res) => {
+  Genres.findOne({ Name: req.params.Name })
+  .then((genre) => {
+    res.json(genre.Description);
+  })
+
+  .catch((err) => {
+    console.error(err);
+    res.status(500).send('Error: ' + err);
+  });
 });
 
-app.get('/directors/:directorName', (req, res) => {
-  res.status(200).json(movies.find((director) => {
-      return director.director.name === req.params.directorName
-  })) 
-})
+app.get('/directors/:Name', (req, res) => {
+  Directors.findOne({ Name: req.params.Name })
+  .then((director) => {
+    res.json(director);
+  })
+
+  .catch((err) => {
+    console.error(err);
+    res.status(500).send('Error: ' + err);
+  });
+});
 
 
 app.get('/documentation', (req, res) => {                  
@@ -137,30 +88,136 @@ app.get('/documentation', (req, res) => {
 });
 
 
+// Get all users
 app.get('/users', (req, res) => {
-  res.send('current users')
+  Users.find()
+    .then((users) => {
+      res.status(201).json(users);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send('Error: ' + err);
+    });
+});
+
+// Get a user by username
+app.get('/users/:Username', (req, res) => {
+  Users.findOne({ Username: req.params.Username })
+    .then((users) => {
+      res.json(users);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send('Error: ' + err);
+    });
 });
 
 // Add new user
-app.post('/users/:username', (req, res) => {
-  res.send('user added')
+app.post('/users', (req, res) => {
+  Users.findOne({ Username: req.body.Username })
+    .then((user) => {
+      if (user) {
+        return res.status(400).send(req.body.Username + 'already exists');
+      } else {
+        Users
+          .create({
+            Username: req.body.Username,
+            Password: req.body.Password,
+            Email: req.body.Email,
+            Birthday: req.body.Birthday
+          })
+          .then((user) =>{res.status(201).json(user) })
+        .catch((error) => {
+          console.error(error);
+          res.status(500).send('Error: ' + error);
+        })
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+      res.status(500).send('Error: ' + error);
+    });
 });
 
-app.delete('/users/:delete', (req, res) => {
-  res.send('user deleted')
+// Update a user's info, by username
+/* We’ll expect JSON in this format
+{
+  Username: String,
+  (required)
+  Password: String,
+  (required)
+  Email: String,
+  (required)
+  Birthday: Date
+}*/
+app.put('/users/:Username', (req, res) => {
+  Users.findOneAndUpdate({ Username: req.params.Username }, { $set:
+    {
+      Username: req.body.Username,
+      Password: req.body.Password,
+      Email: req.body.Email,
+      Birthday: req.body.Birthday
+    }
+  },
+  { new: true }, // This line makes sure that the updated document is returned
+  (err, updatedUser) => {
+    if(err) {
+      console.error(err);
+      res.status(500).send('Error: ' + err);
+    } else {
+      res.json(updatedUser);
+    }
+  });
 });
 
-app.post('/users/:username/:add', (req, res) => {
-  res.send('user added a favorite movie')
+// Add a movie to a user's list of favorites
+app.post('/users/:Username/movies/:MovieID', (req, res) => {
+  Users.findOneAndUpdate({ Username: req.params.Username }, {
+     $push: { FavoriteMovies: req.params.MovieID }
+   },
+   { new: true }, // This line makes sure that the updated document is returned
+  (err, updatedUser) => {
+    if (err) {
+      console.error(err);
+      res.status(500).send('Error: ' + err);
+    } else {
+      res.json(updatedUser);
+    }
+  });
 });
 
-app.delete('/users/:username/:remove', (req, res) => {
-  res.send('user deleted a favorite movie')
+// Delete a user by username
+app.delete('/users/:Username', (req, res) => {
+  Users.findOneAndRemove({ Username: req.params.Username })
+  .then((user) => {
+    if (!user) {
+      res.status(400).send(req.params.Username + ' was not found');
+    } else {
+      res.status(200).send(req.params.Username + ' was deleted.');
+    }
+  })
+  .catch((err) => {
+    console.error(err);
+    res.status(500).send('Error: ' + err);
+  });
 });
 
-app.delete('/users/:deregister', (req, res) => {
-  res.send('user unregistered')
+
+app.delete('/users/:Username/movies/:MovieID', (req, res) => {
+  Users.findOneAndUpdate({ Username: req.params.Username }, {
+    $pull: { FavoriteMovies: req.params.MovieID }
+  },
+  { new: true }, // ensures that the updated document is returned
+ (err, removeFavorite) => {
+   if (err) {
+     console.error(err);
+     res.status(500).send('Error: ' + err);
+   } else {
+     res.json(removeFavorite);
+   }
+ });
 });
+
 
 
 // listen for requests
