@@ -196,7 +196,7 @@
     </tr>
     <tr>
         <td>
-            will show a user deleted
+            '/users/:Username'
         </td>
         <td>
             '/users/:delete'
@@ -205,7 +205,7 @@
             delete
         </td>
         <td>
-            :delete
+            '/users/:Username'
         </td>
         <td>
             states a user has been deleted
@@ -219,13 +219,13 @@
             will show a user added a movie to their favorites list
         </td>
         <td>
-            '/users/:username/:add'
+            /users/:Username/movies/:MovieID
         </td>
         <td>
             post
         </td>
         <td>
-            :username/:add
+            /users/:Username/movies/:MovieID
         </td>
         <td>
             states a user added a movie to their favorites list
@@ -239,13 +239,13 @@
             will show a user deleted a movie from their favorites list
         </td>
         <td>
-            '/users/:username/:remove'
+            /users/:Username/movies/:MovieID
         </td>
         <td>
             delete
         </td>
         <td>
-            :username/:remove
+            /users/:Username/movies/:MovieID
         </td>
         <td>
             states a user deleted a movie from their favorites list
