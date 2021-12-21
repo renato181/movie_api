@@ -46,10 +46,10 @@ app.get('/movies', (req, res) => {
 });
 
 
-app.get('/movies/:title', (req, res) => {
-  Movies.findOne({ Title: req.params.Title})
-  .then((movies) => {
-      res.status(201).json(movies);
+app.get( '/movies/:Title', (req, res) => {
+  Movies.findOne( { Title: req.params.Title } )
+  .then((movie) => {
+    res.status(201).json(movie);
   })
   .catch((err) => {
     console.error(err);
@@ -101,19 +101,19 @@ app.get('/users', (req, res) => {
 });
 
 // Get a user by username
-app.get('/users/:Username', (req, res) => {
-  Users.findOne({ Username: req.params.Username })
-    .then((users) => {
-      res.json(users);
-    })
-    .catch((err) => {
-      console.error(err);
-      res.status(500).send('Error: ' + err);
-    });
+app.get( '/users/:username', (req, res) => {
+  Users.findOne( { Username: req.params.username } )
+  .then((user) => {
+    res.json(user);
+  })
+  .catch((err) => {
+    console.error(err);
+    res.status(500).send('Error: ' + err);
+  });
 });
 
 // Add new user
-app.post('/users', (req, res) => {
+app.post( '/users', (req, res) => {
   Users.findOne({ Username: req.body.Username })
     .then((user) => {
       if (user) {
