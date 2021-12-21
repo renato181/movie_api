@@ -1,0 +1,4 @@
+{"_id":{"$oid":"61bfb5760475c949480970fc"},"Username":"blookcoyote","Password":"test123","Email":"blookcoyote@gmail.com","Birthday":{"$date":"1995-01-11T00:00:00Z"},"FavoriteMovies":[]}
+{"_id":{"$oid":"61bfb5db0475c949480970fd"},"Username":"cringlingdesign","Password":"paint123","Email":"cringlingdesign@gmail.com","Birthday":{"$date":"1985-02-19T00:00:00Z"},"FavoriteMovies":[]}
+{"_id":{"$oid":"61bfb60d0475c949480970fe"},"Username":"bunnerpant","Password":"muggs123","Email":"bunnerpant@gmail.com","Birthday":{"$date":"1990-07-14T00:00:00Z"},"FavoriteMovies":[]}
+{"_id":{"$oid":"61bfb6310475c949480970ff"},"Username":"moopyflapjack","Password":"spark123","Email":"moopyflapjack@gmail.com","Birthday":{"$date":"1980-08-13T00:00:00Z"},"FavoriteMovies":[{"$oid":"5c3bd189515a081b363cb7e4"}]}
