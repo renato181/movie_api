@@ -45,7 +45,7 @@
             get
         </td>
         <td>
-            none
+            res.send
         </td>
         <td>
             "Welcome to my 80's movies!"
@@ -65,7 +65,7 @@
             get
         </td>
         <td>
-            none
+            movies.find()
         </td>
         <td>
             the entire list of movies
@@ -85,7 +85,7 @@
             get
         </td>
         <td>
-            :title
+            movies.findOne()
         </td>
         <td>
             will show all the information of any movie with this title
@@ -105,7 +105,7 @@
             get
         </td>
         <td>
-            :genre
+            genres.findOne()
         </td>
         <td>
             will show all the information of any movie with this genre
@@ -125,7 +125,7 @@
             get
         </td>
         <td>
-            :directorName
+            directors.findOne()
         </td>
         <td>
             will show all the information of the movies directed by this person
@@ -145,7 +145,7 @@
             get
         </td>
         <td>
-            none
+            res.sendFile
         </td>
         <td>
             will show a project description and this table (so far)
@@ -165,7 +165,7 @@
             get
         </td>
         <td>
-            none
+            users.findOne()
         </td>
         <td>
             displays current users
@@ -185,10 +185,14 @@
             post
         </td>
         <td>
-            :username
+            users.create
         </td>
         <td>
-            states a new user has been added
+            states a new user has been added, example:
+            Username: "Name"
+            Password: "Password"
+            Email: "Something@gmail.com"
+            Birthday: "12/12/1982"
         </td>
         <td>
             text
@@ -205,7 +209,7 @@
             delete
         </td>
         <td>
-            '/users/:Username'
+            users.findOneAndUpdate
         </td>
         <td>
             states a user has been deleted
@@ -225,7 +229,7 @@
             post
         </td>
         <td>
-            /users/:Username/movies/:MovieID
+            users.findOneAndUpdate
         </td>
         <td>
             states a user added a movie to their favorites list
@@ -245,7 +249,7 @@
             delete
         </td>
         <td>
-            /users/:Username/movies/:MovieID
+            users.findOneAndUpdate
         </td>
         <td>
             states a user deleted a movie from their favorites list
