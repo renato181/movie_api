@@ -203,19 +203,19 @@ app.delete('/users/:Username', (req, res) => {
 });
 
 
-app.delete('/users/:Username/movies/:MovieID', (req, res) => {
-  Users.findOneAndUpdate({ Username: req.params.Username }, {
-    $pull: { FavoriteMovies: req.params.MovieID }
-  },
-  { new: true }, // ensures that the updated document is returned
- (err, removeFavorite) => {
-   if (err) {
-     console.error(err);
-     res.status(500).send('Error: ' + err);
-   } else {
-     res.json(removeFavorite);
-   }
- });
+app.delete('/users/:Username/:user/:deregister', (req, res) => {
+  Users.findOneAndRemove({ Username: req.params.Username })
+    .then((user) => {
+      if (!user) {
+        res.status(400).send(req.params.Username + ' was not found');
+      } else {
+        res.status(200).send(req.params.Username + ' was deleted.');
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send('Error: ' + err);
+    });
 });
 
 
