@@ -37,13 +37,11 @@ require('./passport');
 app.use(morgan('common'))
 
 // GET requests
-app.get('/', passport.authenticate('jwt', { session: false }),
-    (req, res) => {
+app.get('/',(req,res) => {
     res.send('Welcome to my 80\'s movies!');
 });
 
-app.get('/movies', passport.authenticate('jwt', { session: false }),
-    (req, res) => {
+app.get('/movies', function (req, res)  {
     Movies.find()
         .then((movie) => {
             res.json(movie);
