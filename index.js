@@ -30,7 +30,10 @@ app.use(cors());
 
 let auth = require("./auth")(app);
 
-mongoose.connect( process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(`${process.env.MONGO_URL}`, {useNewUrlParser: true, useUnifiedTopology: true}, ()=>{
+    console.log("mongodb is connected")
+});
+
 // mongoose.connect('mongodb://localhost:27017/myFlixDB', 
 // { useNewUrlParser: true, 
 //  useUnifiedTopology: true });
