@@ -1,39 +1,40 @@
-const express = require('express'),
-  bodyParser = require('body-parser'),
-  uuid = require ('uuid');
-
-const morgan = require('morgan');
-const app = express();
 const mongoose = require('mongoose');
 const Models = require('./models.js');
 
 const Movies = Models.Movie;
 const Users = Models.User;
+const express = require("express");
+const morgan = require("morgan");
+const bodyParser = require("body-parser");
+const uuid = require("uuid");
 
-const { check, validationResult } = require('express-validator');
+const { check, validationResult } = require("express-validator");
+const app = express();
+
+const passport = require("passport");
+app.use(passport.initialize());
+require("./passport");
+
+app.use(morgan("common"));
+app.use(express.static("public"));
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+const cors = require("cors");
+app.use(cors());
+
+let auth = require("./auth")(app);
+
+// mongoose.connect(process.env.CONNECTION_URI, {useNewUrlParser: true, useUnifiedTopology: true });
 
 // mongoose.connect('mongodb://localhost:27017/myFlixDB', 
 // { useNewUrlParser: true, 
 //  useUnifiedTopology: true });
 
-// mongoose.connect('mongodb+srv://Boston:Beantown@renatodb.dhhj6.mongodb.net/myFlixDB?retryWrites=true&w=majority', 
-// { useNewUrlParser: true, 
-// useUnifiedTopology: true });
-
-mongoose.connect(process.env.CONNECTION_URI, {useNewUrlParser: true, useUnifiedTopology: true });
-
-
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-
-const cors = require('cors');
-app.use(cors());
-
-let auth = require('./auth')(app);
-const passport = require('passport');
-require('./passport');
-
-app.use(morgan('common'))
+mongoose.connect('mongodb+srv://Boston:Beantown@renatodb.dhhj6.mongodb.net/myFlixDB?retryWrites=true&w=majority', 
+{ useNewUrlParser: true, 
+useUnifiedTopology: true });
 
 // GET requests
 app.get('/',(req,res) => {
