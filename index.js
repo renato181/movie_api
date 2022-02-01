@@ -30,17 +30,21 @@ app.use(cors());
 
 let auth = require("./auth")(app);
 
-mongoose.connect(`${process.env.MONGO_URL}`, { useNewUrlParser: true, useUnifiedTopology: true }, () => {
-    console.log("mongodb is connected")
-});
+// mongoose.connect(`${process.env.MONGO_URL}`, { useNewUrlParser: true, useUnifiedTopology: true }, () => {
+//   console.log("mongodb is connected")
+//});
 
-// mongoose.connect('mongodb://localhost:27017/myFlixDB', 
-// { useNewUrlParser: true, 
-//  useUnifiedTopology: true });
+// mongoose.connect('mongodb://localhost:27017/myFlixDB',
+//     {
+//         useNewUrlParser: true,
+//         useUnifiedTopology: true
+//     });
 
-// mongoose.connect('mongodb+srv://Boston:Beantown@renatodb.dhhj6.mongodb.net/myFlixDB?retryWrites=true&w=majority', 
-// { useNewUrlParser: true, 
-// useUnifiedTopology: true });
+mongoose.connect('mongodb+srv://Boston:Beantown@renatodb.dhhj6.mongodb.net/myFlixDB?retryWrites=true&w=majority',
+    {
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+    });
 
 // GET requests
 app.get('/', (req, res) => {
